@@ -26,6 +26,7 @@ import com.calak.jemmy.technicaltestinveli.Data.Online.Online;
 import com.calak.jemmy.technicaltestinveli.Listener.OnMenu;
 import com.calak.jemmy.technicaltestinveli.Model.mProject;
 import com.calak.jemmy.technicaltestinveli.R;
+import com.calak.jemmy.technicaltestinveli.Utils.TimeFormater;
 
 import java.util.ArrayList;
 
@@ -62,7 +63,7 @@ public class ProjectsFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layoutProject for this fragment
         View view =inflater.inflate(R.layout.fragment_projects, container, false);
         ButterKnife.bind(this, view);
         initUI();
@@ -77,7 +78,7 @@ public class ProjectsFragment extends Fragment implements View.OnClickListener {
         layout.setColorSchemeResources(R.color.colorPrimary);
         layoutEmpty.setColorSchemeResources(R.color.colorPrimary);
         layout.setOnRefreshListener(onRefresh);
-        layoutEmpty.setOnRefreshListener(onRefresh);
+        layoutEmpty.setOnRefreshListener(onRefresh1);
         btNew.setOnClickListener(this);
         btArchived.setOnClickListener(this);
         btUnarchived.setOnClickListener(this);
@@ -96,9 +97,20 @@ public class ProjectsFragment extends Fragment implements View.OnClickListener {
 
         adapter = new RecyclerViewAdapter<mProject, ProjectsHolder>( R.layout.layout_projects, data, mProject.class, ProjectsHolder.class) {
             @Override
-            protected void bindView(ProjectsHolder holder, mProject model, int position) {
+            protected void bindView(ProjectsHolder holder, final mProject model, int position) {
                 holder.title.setText(model.getTitle());
-                holder.createAt.setText(model.getCreateAt());
+                holder.createAt.setText(TimeFormater.type2(model.getCreateAt(), 0));
+                holder.layoutProject.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle =new Bundle();
+                        bundle.putSerializable("data", model);
+                        DetailProjectFragment detailProjectFragment = new DetailProjectFragment();
+                        detailProjectFragment.setArguments(bundle);
+
+                        onMenu.OnMenu(detailProjectFragment);
+                    }
+                });
             }
         };
         recyclerProject.setAdapter(adapter);
@@ -107,6 +119,14 @@ public class ProjectsFragment extends Fragment implements View.OnClickListener {
     SwipeRefreshLayout.OnRefreshListener onRefresh = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            Log.d("onNotEmpty","<<");
+            GetData();
+        }
+    };
+    SwipeRefreshLayout.OnRefreshListener onRefresh1 = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            Log.d("onEmpty",">>");
             GetData();
         }
     };

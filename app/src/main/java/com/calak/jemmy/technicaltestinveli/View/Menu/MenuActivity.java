@@ -43,16 +43,7 @@ public class MenuActivity extends AppCompatActivity implements OnMenu {
 
     private void InitUI() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//        mainLayout();
         OnMenus(new ProjectsFragment());
-    }
-
-    private void mainLayout() {
-        fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
-        ProjectsFragment projectsFragment = new ProjectsFragment();
-        transaction.replace(R.id.mainFrame, projectsFragment, projectsFragment.getClass().getName());
-        transaction.commit();
     }
 
     private void OnMenus(Fragment fragment){
@@ -86,4 +77,5 @@ public class MenuActivity extends AppCompatActivity implements OnMenu {
     public void OnMenu(Fragment fragment) {
         OnMenus(fragment);
     }
+
 }

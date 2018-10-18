@@ -9,10 +9,12 @@ package com.calak.jemmy.technicaltestinveli.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class mProject {
+import java.io.Serializable;
+
+public class mProject implements Serializable {
     @SerializedName("ID")
     String id;
-    @SerializedName("CreateAt")
+    @SerializedName("CreatedAt")
     String createAt;
     @SerializedName("title")
     String title;
@@ -24,6 +26,10 @@ public class mProject {
         this.createAt = createAt;
         this.title = title;
         this.archived = archived;
+    }
+
+    public mProject(String title) {
+        this.title = title;
     }
 
     public String getId() {

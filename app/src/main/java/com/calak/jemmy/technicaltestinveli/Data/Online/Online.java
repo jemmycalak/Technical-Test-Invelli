@@ -12,8 +12,12 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.calak.jemmy.technicaltestinveli.Model.mProject;
+import com.calak.jemmy.technicaltestinveli.Model.mTasks;
 import com.calak.jemmy.technicaltestinveli.Utils.RetrofitInstance;
+import com.calak.jemmy.technicaltestinveli.View.Project.DetailProjectFragment;
+import com.calak.jemmy.technicaltestinveli.View.Project.NewProjectFragment;
 import com.calak.jemmy.technicaltestinveli.View.Project.ProjectsFragment;
+import com.calak.jemmy.technicaltestinveli.View.Task.NewTaskFragment;
 
 import java.util.ArrayList;
 
@@ -38,6 +42,63 @@ public class Online {
             }
             @Override
             public void onFailure(Call<ArrayList<mProject>> call, Throwable t) {
+                Log.d("ResponseError", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public  void PostData(mProject title, Activity activity, final Fragment fragment){
+        Call call = service.createProject(title);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.d("Response", response.body()+"-"+response.message()+"-"+response.isSuccessful());
+                if (response.isSuccessful()){
+                    ((NewProjectFragment)fragment).onSucess();
+                }else{
+
+                }
+            }
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+                Log.d("ResponseError", t.getMessage());
+            }
+        });
+    }
+
+    public void GetTasks(Activity activity, final Fragment fragment, String title){
+
+        Call<ArrayList<mTasks>> call = service.getTasks(title);
+        call.enqueue(new Callback<ArrayList<mTasks>>() {
+            @Override
+            public void onResponse(Call<ArrayList<mTasks>> call, Response<ArrayList<mTasks>> response) {
+                Log.d("Response", response.body()+"-"+response.isSuccessful());
+                ((DetailProjectFragment)fragment).onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<mTasks>> call, Throwable t) {
+                Log.d("ResponsError", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void CreateTask(Activity activity, final Fragment fragment, String title, mTasks tasks){
+        Call call = service.createTask( title, tasks);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.d("Response", response.isSuccessful()+"-"+response.errorBody()+"-"+response.toString());
+                if(response.isSuccessful()){
+                    ((NewTaskFragment)fragment).onSuccess();
+                }
+            }
+            @Override
+            public void onFailure(Call call, Throwable t) {
                 Log.d("ResponseError", t.getMessage());
                 t.printStackTrace();
             }

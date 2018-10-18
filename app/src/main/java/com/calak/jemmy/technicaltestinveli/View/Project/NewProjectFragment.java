@@ -8,15 +8,22 @@
 package com.calak.jemmy.technicaltestinveli.View.Project;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.calak.jemmy.technicaltestinveli.Data.Online.Online;
+import com.calak.jemmy.technicaltestinveli.Model.mProject;
 import com.calak.jemmy.technicaltestinveli.R;
+import com.calak.jemmy.technicaltestinveli.Utils.Validator;
+import com.calak.jemmy.technicaltestinveli.Utils.widget.DialogListener;
+import com.calak.jemmy.technicaltestinveli.Utils.widget.Loader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +37,8 @@ public class NewProjectFragment extends Fragment {
     EditText title;
     @BindView(R.id.lTitle)
     TextInputLayout lTitle;
+    @BindView(R.id.btNewProject)
+    Button btNew;
 
     public NewProjectFragment() {
         // Required empty public constructor
@@ -38,11 +47,39 @@ public class NewProjectFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layoutProject for this fragment
         View view = inflater.inflate(R.layout.fragment_new_project, container, false);
         ButterKnife.bind(this, view);
-
+        initUI();
         return view;
     }
 
+    private void initUI() {
+        btNew.setOnClickListener(onNew);
+    }
+
+    Button.OnClickListener onNew = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String a =title.getText().toString();
+            if(Validator.isText(a, lTitle, getActivity())){
+                DoCreate(a);
+            }
+        }
+    };
+
+    private void DoCreate(String a) {
+        Loader.StartLoad(getContext());
+        new Online().PostData(new mProject(a), getActivity(), NewProjectFragment.this);
+    }
+
+    public void onSucess(){
+        Loader.StopLoad();
+        DialogListener.AlertOK(getContext(), "Berhasil menambahkan project.", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().onBackPressed();
+            }
+        });
+    }
 }

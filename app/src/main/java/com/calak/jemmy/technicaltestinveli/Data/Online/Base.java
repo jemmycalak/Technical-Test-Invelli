@@ -11,5 +11,6 @@ public class Base {
 
     public final static String BASEURL = "http://13.67.33.142:3000/";
     public final static String GetProjects = "projects";
+    public final static String GetTask = "/tasks";
 
 }

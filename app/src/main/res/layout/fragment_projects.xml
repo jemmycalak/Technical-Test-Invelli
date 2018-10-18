@@ -62,13 +62,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <include layout="@layout/layout_empty"/>
         <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/swipRefresh">
             <include layout="@layout/layout_recyclerview"/>
         </android.support.v4.widget.SwipeRefreshLayout>
-        <include layout="@layout/layout_empty"/>
     </FrameLayout>
 </LinearLayout>

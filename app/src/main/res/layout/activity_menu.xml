@@ -7,8 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".View.Menu.MenuActivity">
 
-
-    <include layout="@layout/layout_main_frame"/>
+    <include
+        layout="@layout/layout_main_frame"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
