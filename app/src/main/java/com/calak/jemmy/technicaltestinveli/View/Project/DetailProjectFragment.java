@@ -16,7 +16,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ import com.calak.jemmy.technicaltestinveli.Model.mProject;
 import com.calak.jemmy.technicaltestinveli.Model.mTasks;
 import com.calak.jemmy.technicaltestinveli.R;
 import com.calak.jemmy.technicaltestinveli.Utils.TimeFormater;
-import com.calak.jemmy.technicaltestinveli.Utils.widget.Loader;
 import com.calak.jemmy.technicaltestinveli.View.Task.DetailTaskFragment;
 import com.calak.jemmy.technicaltestinveli.View.Task.NewTaskFragment;
 
@@ -75,7 +73,7 @@ public class DetailProjectFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_project, container, false);
         ButterKnife.bind(this, view);
         initUI();
-        bindData();
+//        bindData();
 
         return view;
     }
@@ -93,25 +91,25 @@ public class DetailProjectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("data", model.getTitle());
+                bundle.putString("data", modelProject.getTitle());
                 NewTaskFragment newTaskFragment = new NewTaskFragment();
                 newTaskFragment.setArguments(bundle);
                 onMenu.OnMenu(newTaskFragment);
             }
         });
     }
-    mProject model;
+    mProject modelProject;
     private void bindData() {
         Bundle bundle = getArguments();
-        model = (mProject) bundle.getSerializable("data");
-        title.setText(model.getTitle());
-        createAt.setText(TimeFormater.type2(model.getCreateAt(), 0));
-        if (model.isArchived()) {
+        modelProject = (mProject) bundle.getSerializable("data");
+        title.setText(modelProject.getTitle());
+        createAt.setText(TimeFormater.type2(modelProject.getCreateAt(), 0));
+        if (modelProject.isArchived()) {
             archived.setText("Archived");
         } else {
             archived.setText("Unarchived");
         }
-        GetTask(model.getTitle());
+        GetTask(modelProject.getTitle());
     }
 
     private void GetTask(String title) {
@@ -136,6 +134,7 @@ public class DetailProjectFragment extends Fragment {
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("data", model);
+                        bundle.putString("project", modelProject.getTitle());
                         DetailTaskFragment detailTaskFragment = new DetailTaskFragment();
                         detailTaskFragment.setArguments(bundle);
                         onMenu.OnMenu(detailTaskFragment);
@@ -159,5 +158,11 @@ public class DetailProjectFragment extends Fragment {
         }else{
             throw new RuntimeException(context.toString());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onMenu.OnActionBar("Detail Project");
     }
 }

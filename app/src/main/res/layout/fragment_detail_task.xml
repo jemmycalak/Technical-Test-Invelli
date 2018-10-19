@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/paddingMedium"
     android:background="@color/gray"
+    android:padding="@dimen/paddingMedium"
     tools:context=".View.Task.DetailTaskFragment">
 
     <android.support.v7.widget.CardView
@@ -17,129 +17,108 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:orientation="vertical"
             android:padding="@dimen/paddingSmall">
 
-            <LinearLayout
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lNameTask"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="@string/nama_task"
-                    android:layout_weight="1.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
+                <EditText
                     android:id="@+id/nameTask"
-                    android:layout_weight="0.7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nama_task"/>
+            </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:text="@string/dibuat"
-                    android:layout_weight="1.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lCreateAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/createAt"
-                    android:layout_weight="0.7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dibuat" />
 
-                <TextView
-                    android:text="@string/priority"
-                    android:layout_weight="1.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/priority"
-                    android:layout_weight="0.7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:hint="@string/priority"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:text="@string/status"
-                    android:layout_weight="1.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/status"
-                    android:layout_weight="0.7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:hint="@string/status"/>
+            </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:text="@string/deadline"
-                    android:layout_weight="1.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/deadline"
-                    android:layout_weight="0.7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/deadline"/>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <LinearLayout
-        android:layout_below="@+id/layoutDetailTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
+        android:layout_below="@+id/layoutDetailTask"
+        android:layout_marginLeft="@dimen/marginSmaller"
         android:layout_marginRight="@dimen/marginSmaller"
-        android:layout_marginLeft="@dimen/marginSmaller">
+        android:weightSum="2">
+
         <Button
             android:id="@+id/btDelete"
-            android:background="@android:color/holo_red_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_delete"
-            android:text="@string/hapus"
-            android:padding="@dimen/paddingSmall"
-            android:textColor="@android:color/white"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:layout_marginRight="1dp"/>
+            android:background="@android:color/holo_red_dark"
+            android:drawableRight="@drawable/ic_delete"
+            android:padding="@dimen/paddingSmall"
+            android:text="@string/hapus"
+            android:textColor="@android:color/white" />
+
         <Button
             android:id="@+id/btSave"
-            android:layout_marginLeft="1dp"
-            android:padding="@dimen/paddingSmall"
-            android:background="@android:color/holo_green_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_save"
-            android:text="@string/simpan"
-            android:textColor="@android:color/white"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:drawableRight="@drawable/ic_edit"
+            android:drawableTint="@android:color/white"
+            android:padding="@dimen/paddingSmall"
+            android:text="@string/ubah"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </RelativeLayout>

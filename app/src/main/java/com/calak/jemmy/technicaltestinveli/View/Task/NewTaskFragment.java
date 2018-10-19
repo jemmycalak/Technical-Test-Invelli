@@ -8,6 +8,7 @@
 package com.calak.jemmy.technicaltestinveli.View.Task;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.calak.jemmy.technicaltestinveli.Data.Online.Online;
+import com.calak.jemmy.technicaltestinveli.Listener.OnMenu;
 import com.calak.jemmy.technicaltestinveli.Model.mTasks;
 import com.calak.jemmy.technicaltestinveli.R;
 import com.calak.jemmy.technicaltestinveli.Utils.MaxMinDate;
@@ -135,6 +137,22 @@ public class NewTaskFragment extends Fragment implements DatePickerDialog.OnDate
                 getActivity().onBackPressed();
             }
         });
+    }
+
+    OnMenu onMenu;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnMenu){
+            onMenu = (OnMenu) context;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onMenu.OnActionBar("Tambah Task");
     }
 
 }

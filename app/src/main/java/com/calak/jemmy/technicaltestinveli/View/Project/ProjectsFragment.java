@@ -162,4 +162,10 @@ public class ProjectsFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onMenu.OnActionBar("Technical Test Invelli");
+    }
 }

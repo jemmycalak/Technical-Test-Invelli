@@ -1,96 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:padding="@dimen/paddingMedium"
-    tools:context=".View.Project.DetailProjectFragment"
-    android:id="@+id/swipRefresh">
-
-    <RelativeLayout
+    tools:context=".View.Project.DetailProjectFragment">
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/layoutDetail"
+        android:layout_height="match_parent"
+        android:id="@+id/swipRefresh">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                android:id="@+id/layoutDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/paddingSmall">
+                android:layout_alignParentTop="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/lTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/paddingSmall">
 
-                    <EditText
-                        android:id="@+id/title"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/lTitle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/titleproject" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/lArchived"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/titleproject" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/archived"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/lArchived"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/arcived" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/lCreateAt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/archived"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/arcived" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/createAt"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/lCreateAt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/tanggal_pembuatan" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutDetail"
-            android:layout_marginTop="@dimen/paddingSmall"
-            android:text="Task of project :"
-            android:textSize="@dimen/textLarge"
-            android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/createAt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tanggal_pembuatan" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        <include
-            layout="@layout/layout_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tast" />
+            <TextView
+                android:id="@+id/tast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutDetail"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:text="Task of project :"
+                android:textSize="@dimen/textLarge"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btEdit"
+            <include
+                layout="@layout/layout_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tast" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:visibility="gone"
+                android:id="@+id/btEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/marginMedium"/>
+
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:fabMenuGravity="bottom|end">
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/custom_fab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/marginMedium"
-            android:src="@drawable/ic_adds"
-            android:tint="@color/colorPrimary"
-            app:backgroundTint="@android:color/white" />
-    </RelativeLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+            app:fabIcon="@drawable/ic_menu"
+            android:backgroundTint="@color/gray"
+            android:drawableTint="@color/colorPrimary"
+            app:fabAnimateMenu="true"/>
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabIcon="@drawable/ic_delete"
+            app:fabText="@string/hapusproject"
+            android:backgroundTint="@android:color/holo_red_dark"
+            app:fabIconPosition="end" />
+
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fUbah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabIcon="@drawable/ic_edit"
+            app:fabText="@string/ubahproject"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            app:fabIconPosition="end"
+            android:drawableTint="@android:color/white"/>
+        <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+            android:id="@+id/fTambah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabIcon="@drawable/ic_adds"
+            app:fabText="@string/tambahtask"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:fabSize="normal"
+            app:fabIconPosition="end"
+            android:drawableTint="@android:color/white"/>
+
+    </com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout>
+</android.support.constraint.ConstraintLayout>

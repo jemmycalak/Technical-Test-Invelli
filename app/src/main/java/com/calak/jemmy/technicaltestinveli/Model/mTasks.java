@@ -25,19 +25,15 @@ public class mTasks implements Serializable {
     @SerializedName("priority")
     String priority;
 
-//    public mTasks(String id, String createat, String title, String deadline, boolean done, String priority) {
-//        this.id = id;
-//        this.createat = createat;
-//        this.title = title;
-//        this.deadline = deadline;
-//        this.done = done;
-//        this.priority = priority;
-//    }
-
     public mTasks(String title, String priority, String deadline) {
         this.title = title;
         this.priority = priority;
         this.deadline = deadline;
+    }
+
+    public mTasks(String title, String priority) {
+        this.title = title;
+        this.priority = priority;
     }
 
     public String getPriority() {

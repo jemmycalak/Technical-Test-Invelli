@@ -19,4 +19,8 @@
     <string name="hapus">Hapus</string>
     <string name="simpan">Simpan</string>
     <string name="dibuat">Dibuat</string>
+    <string name="ubah">Ubah</string>
+    <string name="hapusproject">Hapus Project</string>
+    <string name="ubahproject">Ubah Project</string>
+    <string name="tambahtask">Tambah Task</string>
 </resources>

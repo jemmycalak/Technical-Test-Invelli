@@ -11,4 +11,6 @@ import android.support.v4.app.Fragment;
 
 public interface OnMenu {
     void OnMenu(Fragment fragment);
+    void OnActionBar(String title);
+    void OnFinish();
 }

@@ -14,9 +14,11 @@ import android.util.Log;
 import com.calak.jemmy.technicaltestinveli.Model.mProject;
 import com.calak.jemmy.technicaltestinveli.Model.mTasks;
 import com.calak.jemmy.technicaltestinveli.Utils.RetrofitInstance;
+import com.calak.jemmy.technicaltestinveli.Utils.widget.Loader;
 import com.calak.jemmy.technicaltestinveli.View.Project.DetailProjectFragment;
 import com.calak.jemmy.technicaltestinveli.View.Project.NewProjectFragment;
 import com.calak.jemmy.technicaltestinveli.View.Project.ProjectsFragment;
+import com.calak.jemmy.technicaltestinveli.View.Task.DetailTaskFragment;
 import com.calak.jemmy.technicaltestinveli.View.Task.NewTaskFragment;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class Online {
         call.enqueue(new Callback<ArrayList<mProject>>() {
             @Override
             public void onResponse(Call<ArrayList<mProject>> call, Response<ArrayList<mProject>> response) {
-                Log.d("Response", response.isSuccessful()+"-"+response.code());
+                Log.d("Response", response.isSuccessful()+"-"+response.code()+"-"+response.body());
                 if (response.isSuccessful()){
                     ((ProjectsFragment)fragment).SetDataProject(response.body());
                 }else{
@@ -95,6 +97,42 @@ public class Online {
                 Log.d("Response", response.isSuccessful()+"-"+response.errorBody()+"-"+response.toString());
                 if(response.isSuccessful()){
                     ((NewTaskFragment)fragment).onSuccess();
+                }
+            }
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.d("ResponseError", t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void deleteTask(Activity activity, final Fragment fragment, String title, String id){
+        Call call = service.deleteTask(title, id);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.d("Response", response.body()+"-"+response.message()+"-"+response.isSuccessful());
+                if(response.isSuccessful()){
+                    ((DetailTaskFragment) fragment).onSuccess();
+                }
+            }
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.d("ResponseError", t.getMessage());
+                t.printStackTrace();
+                Loader.StopLoad();
+            }
+        });
+    }
+
+    public  void updateTask(Activity activity, final Fragment fragment, String project, String id, mTasks tasks){
+        Call call = service.updateTask(project, id, tasks);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if(response.isSuccessful()) {
+                    ((DetailTaskFragment)fragment).onUpdateSuccess();
                 }
             }
             @Override
